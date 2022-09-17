@@ -3,7 +3,7 @@
  * 公共部分
  * ------------------------------------------------- */
 body {
-  background: #e5e5e5 url(../../assets/images/background.png);
+  background: #e5e5e5;
   width: 100%;
   overflow-x: hidden;
   padding: 1rem 10%;
