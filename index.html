@@ -37,16 +37,6 @@
         <section class="side" id="side">
 
             <!-- 左栏固定开关，记得及时删除这段代码 Start-->
-            <label class="switch" style="display: none;" onchange="switchFixed()">
-                <script type="text/javaScript">
-                    function switchFixed(){
-                        var value = document.getElementById('side').style.position === 'fixed' ? 'absolute' : 'fixed';
-                        document.getElementById('side').style.position = value;
-                    }
-                </script>
-                <input id="cb" type="checkbox">
-                <span class="slider round"></span>
-            </label>
             <style>
                 @media (min-width: 	750px){
                     .switch{position:relative;display:inline-block!important;width:60px;height:34px;}
@@ -166,7 +156,7 @@
             </section>
 
             <!-- 技术栈 -->
-            <!-- <div class="stack info-unit">
+            <div class="stack info-unit">
                     <h2><i class="fa fa-code" aria-hidden="true"></i>其他</h2>
                     <hr/>
                     <ul>
@@ -183,7 +173,7 @@
                             <span>Git、SVN、Markdown</span>
                         </li>
                     </ul>
-                </div> -->
+                </div>
         </section>
 
         <section class="main">
