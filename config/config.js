@@ -1,14 +1,14 @@
 var config = {
     /*在这里配置你的基本信息，所有数据以字符串形式给出*/
-    name: "卢世荣",
+    name: "林嘉贤",
     sex: "男",
     age: "19",
-    phone: "19870887127",
-    email: "happysnaker@foxmail.com",
-    address: "现居浙江省义乌市",
-    qq: "1637318597",
-    log: "Happysnaker",
-    excpect_work: "Java/Go后端开发",
+    phone: "13631883661",
+    email: "ljx3661@outlook.com",
+    address: "广东省江门",
+    qq: "576243144",
+    log: "LjxMaker",
+    excpect_work: "前端开发",
 
 
     /*在这里配置首页的座右铭集合*/
@@ -38,8 +38,8 @@ var config = {
 
 
     /*在这里配置关于我的信息，你可以内嵌HTML标签以调整格式*/
-    about: "<p>你好！我叫卢世荣，性别男，南昌大学软件学院大二在读。我期望的工作岗位是Go/Java后端开发。</p>" +
-        "<p>我有着较多的Java编程经验，计算机基础知识掌握扎实，能够在工作中很好的完成自己的任务。此外，我有着充满激情的工作态度，团队协同作战能力强，同时我也具备独立开发的能力，擅于发现并解决问题。我的执行力强、责任感高、集体荣誉感强、敢于担当，能够接受加班或出差等安排</p>" +
+    about: "<p>你好！我叫林嘉贤，性别男，广东工商职业技术大学就读。我期望的工作岗位是前端开发。</p>" +
+        "<p>我有着较多的编程经验，计算机基础知识掌握扎实，能够在工作中很好的完成自己的任务。此外，我有着充满激情的工作态度，团队协同作战能力强，同时我也具备独立开发的能力，擅于发现并解决问题。我的执行力强、责任感高、集体荣誉感强、敢于担当，能够接受加班或出差等安排</p>" +
         "<p>十分期待与您的联系!</p>",
 
 
@@ -49,11 +49,11 @@ var config = {
     * ["技能点", 掌握程度, "技能条颜色"]
     */  
     skills: [
-        ["Java", 80, "red"],
-        ["GoLang", 77, "blue"],
-        ["SQL", 75, "#1abc9c"],
+        ["jQuery", 80, "yellow"],
+        ["Vue", 77, "#41b783"],
+        ["TypeScript", 75, "#294e80"],
         ["HTML5", 67, "rgba(0,0,0)"],
-        ["CSS3", 60, "yellow"],
+        ["CSS3", 60, "red"],
         ["JavaScript", 70, "pink"]
     ],
 
@@ -61,16 +61,14 @@ var config = {
     /*这里填写你的技能描述，你可以内嵌HTML标签以调整格式*/
     skills_description: "<ul>" +
         "     <li>操作系统、计算机网络等编程基础知识良好。</li>" +
-        "     <li>熟练掌握Java基础。</li>" +
-        "     <li>熟悉JavaIO、多线程、集合等基础框架。</li>" +
-        "     <li>了解JVM原理。</li>" +
-        "     <li>熟悉Go语言开发基本知识。</li>" +
-        "     <li>熟悉SQL语句编写以及调优。</li>" +
-        "     <li>熟悉基本Linux命令操作。</li>" +
-        "     <li>熟悉Spring、ibatis、struts等框架的使用，了解其原理与机制。</li>" +
-        "     <li>熟悉缓存、消息等机制。</li>" +
+        "     <li>熟练掌握JavaScript基础。</li>" +
+        "     <li>熟悉Vue框架的使用。</li>" +
+        "     <li>了解MVVM原理。</li>" +
+        "     <li>熟悉HTML网页编写。</li>" +
+        "     <li>熟悉SQL语句编写。</li>" +
+        "     <li>有基于Ajax应用的开发经验。</li>" +
+        "     <li>有git和webpack等工具的使用经验。</li>" +
         "     <li>了解分布式系统的设计与应用。</li>" +
-        "     <li>熟悉HTML、CSS、JavaScript以及相应前端知识。</li>" +
         " </ul>",
 
 
@@ -81,7 +79,7 @@ var config = {
      * 通过查看实际效果以调整字题长度
      */
     portfolio: [
-        ["./images/pro-1.png", "http://1.15.234.109:8000/", "个人博客", "这里记录了我的Java后端学习笔记<br>持续更新"],
+        ["./images/pro-1.png", "http://1.15.234.109:8000/", "个人博客", "这里记录了我的前端端学习笔记<br>持续更新"],
         ["./images/pro-2.png", "https://github.com/happysnaker/Gobang", "智能人机对战五子棋", "采用C++编写的智能五子棋人机对战<br>2021/7/23"],
         ["https://pic3.zhimg.com/80/v2-d9766956d5c85c2780e4c5008fd946ca_1440w.jpg", "https://github.com/happysnaker/StudentsManageSystem", "学生管理系统", "C语言+AVL树+多重双向表实现"]
     ],
