@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./vue2.js"></script>
+    <script src="./velocity.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/animate.css">
+    <title>todo</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <div id="app">
+        <div class="main-box">
+            <!-- 头部样式 -->
+            <div class="box-header">
+                <div class="banner">
+                    <img src="./note.75134fb0.svg" alt="">
+                    <div class="title">To-Do List</div>
+                </div>
+                <h1 class="title">~ Today I need to ~</h1>
+            </div>
+            <!-- 输入框 -->
+            <div class="top-input">
+                <div class="input-box">
+                    <input type="text" placeholder="Add" v-model="inputstr" @keyup.enter="addNote">
+                    <div class="line"></div>
+                </div>
+                <button class="submit-btn">
+                    <span>Submit</span>
+                    <div class="shadow"></div>
+                </button>
+            </div>
+            <!-- 内容 -->
+            <div class="content">
+                <ul>
+                    <transition-group name="noteitem">
+
+                        <li :class="[item.complete?'completed':'uncompleted']" v-for="(item,i) in showingListsData"
+                            :key="item.id" v-if="item.show" :reg="'note'+item.id">
+                    </transition-group>
+                    <!-- 标记按钮 -->
+                    <button class="checkbox-btn" @click="setComplete(item.id,$event)">
+                        <svg v-show="item.complete" aria-hidden="true" focusable="false" width="14" height="14"
+                            data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512" data-v-132cabf7="">
+                            <path class="" fill="currentColor"
+                                d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z">
+                            </path>
+                        </svg>
+                    </button>
+                    <!-- 笔记文本 -->
+                    <p class="text" :style="{textDecoration: item.complete ?'line-through':'none'}">
+                        {{item.text}}
+                    </p>
+                    <!-- 删除按钮 -->
+                    <button class="del-btn" @click="delNote(item.id)">
+                        <svg width="14" height="14" aria-hidden="true" focusable="false" data-prefix="fas"
+                            data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
+                            <path class="" fill="currentColor"
+                                d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
+                            </path>
+                        </svg>
+                    </button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer">
+                <transition v-on:before-enter="beforeEnter" v-on:enter="enter">
+                    <!-- 无内容显示 -->
+                    <div class="empty-todos" v-show="notelist == ''"><svg class="icon-a" aria-hidden="true"
+                            focusable="false" data-prefix="fas" data-icon="clipboard-check" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                            <path class="" fill="currentColor"
+                                d="M336 64h-80c0-35.3-28.7-64-64-64s-64 28.7-64 64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM192 40c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24zm121.2 231.8l-143 141.8c-4.7 4.7-12.3 4.6-17-.1l-82.6-83.3c-4.7-4.7-4.6-12.3.1-17L99.1 285c4.7-4.7 12.3-4.6 17 .1l46 46.4 106-105.2c4.7-4.7 12.3-4.6 17 .1l28.2 28.4c4.7 4.8 4.6 12.3-.1 17z">
+                            </path>
+                        </svg><span>Congrat, you have no more tasks to do</span></div>
+                </transition>
+                <!-- 工具区 -->
+                <div class="toolbox" v-if="notelist != ''">
+                    <div class="count-box">{{notelist.length}} item left</div>
+                    <button v-if="showingListIndex >= 1"
+                        :class="{'active-list':showingListIndex ==1 || showActiveBtn == false || showCompleteBtn == false}"
+                        class="show-all" @click="showAll">All</button>
+                    <button v-if="showActiveBtn" :class="{'active-list':showingListIndex == 2}" class="show-active"
+                        @click="showActive">Active</button>
+                    <button v-if="showCompleteBtn" :class="{'active-list':showingListIndex == 3}" class="show-completed"
+                        @click="showCompleted">Completed</button>
+                    <button v-if="showClearCompleteBtn" :class="{'active-list':showingListIndex == 4}"
+                        class="clear-completed" @click="clearCompleted">Clear completed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                inputstr: '',//存放输入框内容
+                notelist: [],//存放笔记内容
+                showingListIndex: 1,
+            },
+            methods: {
+                //笔记添加事件
+                addNote() {
+                    if (this.inputstr == '') {
+                        return
+                    }
+                    this.notelist.push({
+                        text: this.inputstr,
+                        complete: false,
+                        id: this.randomId(),
+                    })
+                    this.inputstr = ''
+                    this.saveToLocalStorage()
+                },
+                //笔记删除事件
+                delNote(targe) {
+                    this.notelist = this.notelist.filter((item) => item.id !== targe)
+                    this.saveToLocalStorage()
+                },
+                //清除已完成
+                clearCompleted() {
+                    this.notelist = this.notelist.filter(item => item.complete === false)
+                    this.saveToLocalStorage()
+                    showAll()
+                },
+
+                //显示全部
+                showAll() {
+                    this.showingListIndex = 1
+                },
+
+                //显示正在进行
+                showActive() {
+                    this.showingListIndex = 2
+                },
+                //显示已完成
+                showCompleted() {
+                    this.showingListIndex = 3
+                },
+                // 设置已完成
+                setComplete(targe, e) {
+                    this.notelist.forEach((item) => {
+                        if (item.id == targe) {
+                            item.complete = !item.complete
+                        }
+                    })
+                    this.saveToLocalStorage()
+                },
+
+                // 保持数据到本地
+                saveToLocalStorage() {
+                    localStorage.notelist = JSON.stringify(this.notelist)
+                },
+
+                // 获取本地数据
+                getLocalStorageToData() {
+                    if (!localStorage.notelist) {
+                        localStorage.notelist = JSON.stringify([])
+                        this.notelist = JSON.parse(localStorage.notelist)
+                    } else {
+                        this.notelist = JSON.parse(localStorage.notelist)
+                    }
+                },
+
+                // 生成随机id
+                randomId() {
+                    return Number(Date.parse(new Date())) + String(Math.floor(Math.random() * 100))
+                },
+                // 动画
+                beforeEnter: function (el) {
+                    el.style.opacity = 0
+                },
+
+                enter: function (el, done) {
+                    Velocity(el, { opacity: 1, scale: '1.1' }, { duration: 300 })
+                    Velocity(el, { scale: '1' }, { complete: done })
+                },
+
+            },
+
+            computed: {
+
+                showActiveBtn() {
+                    return this.notelist.findIndex(item => item.complete == false) == -1 || this.notelist.findIndex(item => item.complete == true) == -1 ? false : true
+                },
+                showCompleteBtn() {
+                    return this.notelist.findIndex(item => item.complete == true) == -1 || this.notelist.findIndex(item => item.complete == false) == -1 ? false : true
+                },
+                showClearCompleteBtn() {
+                    return this.notelist.findIndex(item => item.complete == true) == -1 ? false : true
+                },
+
+                showingListsData() {
+                    if (this.showingListIndex == 1) {
+                        return this.notelist
+                    } else if (this.showingListIndex == 2) {
+                        return this.notelist.filter(item => item.complete == false)
+                    } else if (this.showingListIndex == 3) {
+                        return this.notelist.filter(item => item.complete == true)
+                    }
+                }
+
+            }
+        })
+
+        app.getLocalStorageToData()
+
+    </script>
+</body>
+
+</html>

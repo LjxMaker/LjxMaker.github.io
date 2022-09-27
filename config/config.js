@@ -79,7 +79,7 @@ var config = {
      * 通过查看实际效果以调整字题长度
      */
     portfolio: [
-        ["./images/pro-1.png", "http://1.15.234.109:8000/", "个人博客", "这里记录了我的前端端学习笔记<br>持续更新"],
+        ["./images/pro-1.png", "../myProjects/todo/index.html", "todo", "today need to<br>用来记录要做的事"],
         ["./images/pro-2.png", "https://github.com/happysnaker/Gobang", "智能人机对战五子棋", "采用C++编写的智能五子棋人机对战<br>2021/7/23"],
         ["https://pic3.zhimg.com/80/v2-d9766956d5c85c2780e4c5008fd946ca_1440w.jpg", "https://github.com/happysnaker/StudentsManageSystem", "学生管理系统", "C语言+AVL树+多重双向表实现"]
     ],
@@ -129,19 +129,17 @@ var config = {
      * desc是一段描述，将鼠标移入将会显示该描述
      * 建议您放置数量 <= 5
      */
+
     icon: [
-        ["./svg/LeetCode.svg", "https://leetcode-cn.com/u/happysnaker/", "我的力扣主页"],
-        ["./svg/github.svg", "https://github.com/happysnaker", "我的GitHub主页"],
-        ["./svg/博客.svg", "http://1.15.234.109:8000", "我的个人博客"],
-        ["./svg/掘金.svg", "https://juejin.cn/user/3853167638625000", "我的掘金主页"],
-        ["./svg/知乎.svg", "https://www.zhihu.com/people/tian-xia-you-dao-81", "我的知乎主页"]
+        ["./svg/github.svg", "https://github.com/LjxMaker", "我的GitHub主页"],
+        ["./svg/掘金.svg", "https://juejin.cn/user/3549649503781816", "我的掘金主页"],
     ],
 
 
     //这是一些图片链接，建议您仅更改第二个头像图片
     url: [
         //背景图、头像、作品展示背景、其他经历背景
-        "./images/intro-bg.jpg",
+        "",
         "./images/2.jpg",
         "./images/work-bk.png",
         "./images/4.jpg"
